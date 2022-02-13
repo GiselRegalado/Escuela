@@ -5,6 +5,7 @@
 package paquete;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -59,7 +60,17 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel4.setText("Password");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("jPassword");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyReleased(evt);
+            }
+        });
 
         jLabel5.setText("User");
 
@@ -142,6 +153,14 @@ public class Ventana extends javax.swing.JFrame {
         cerrar();
     }//GEN-LAST:event_formWindowClosing
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        password(evt);
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
+        botpass(evt);
+    }//GEN-LAST:event_jPasswordField1KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -175,6 +194,29 @@ public class Ventana extends javax.swing.JFrame {
                 new Ventana().setVisible(true);
             }
         });
+    }
+    /*
+    caracteristicas para password
+    */
+    public void password(java.awt.event.ActionEvent evt){
+        JPasswordField field = (JPasswordField) evt.getSource();
+        char[] password = field.getPassword();
+        if(password.length < 8){
+            System.out.println("Password must contain at least 8 characters");
+        }
+    }
+    /*
+     habilitar/deshabilitar el botón de acción en consecuencia
+    */
+    public void botpass(java.awt.event.KeyEvent evt){
+        JPasswordField field = (JPasswordField) evt.getSource();
+        char[] password = field.getPassword();
+        
+        if (password==null || password.length==0){
+           jButton1.setEnabled(false);
+        }else{
+            jButton1.setEnabled(true);
+        }
     }
     /*
     Evento ingresar
