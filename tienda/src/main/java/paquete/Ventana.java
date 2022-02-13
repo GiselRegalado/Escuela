@@ -4,12 +4,14 @@
  */
 package paquete;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 /**
  *
- * @author axellopez
+ * @authors axellopez,VeronicaBarragan,GiselRegalado,AndreaAvalos y TadeoVazquez
+ * 
  */
 public class Ventana extends javax.swing.JFrame {
 
@@ -19,7 +21,6 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         
-        this.getContentPane().setBackground(new java.awt.Color(25, 118, 210));
         this.jButton1.setBackground(new java.awt.Color(255, 152, 0));
         this.jButton1.setForeground(new java.awt.Color(255,255,255));
         this.jButton2.setBackground(new java.awt.Color(255, 152, 0));
@@ -51,7 +52,7 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Inicio de Sesión");
-        setBackground(new java.awt.Color(33, 150, 243));
+        setBackground(new java.awt.Color(25, 118, 210));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -200,10 +201,7 @@ public class Ventana extends javax.swing.JFrame {
     */
     public void password(java.awt.event.ActionEvent evt){
         JPasswordField field = (JPasswordField) evt.getSource();
-        char[] password = field.getPassword();
-        if(password.length < 8){
-            System.out.println("Password must contain at least 8 characters");
-        }
+        field.setToolTipText("Password must contain at least 8 characters");
     }
     /*
      habilitar/deshabilitar el botón de acción en consecuencia
@@ -211,12 +209,23 @@ public class Ventana extends javax.swing.JFrame {
     public void botpass(java.awt.event.KeyEvent evt){
         JPasswordField field = (JPasswordField) evt.getSource();
         char[] password = field.getPassword();
-        
+        char[] correctpass = new char[]{'a','d','m','i','n'};
         if (password==null || password.length==0){
+            
            jButton1.setEnabled(false);
         }else{
             jButton1.setEnabled(true);
         }
+        if(password.length < 8){
+            field.setToolTipText("Password must contain at least 8 characters");
+            jButton1.setEnabled(false);
+        }
+        if(Arrays.equals(password, correctpass)){
+            jButton1.setEnabled(true);
+            JOptionPane.showMessageDialog(rootPane,"correct password");
+        }
+        
+        
     }
     /*
     Evento ingresar
